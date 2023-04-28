@@ -15,6 +15,27 @@ then
     Usage
 fi
 
+read .p "introduce el nombre completo: " comments 
 read -p "introduce el nombre del usuario: " Username 
+read -p "introduce  el password: " Password
 
-echo "creant l'usuari ${Username}"
+useradd -m -c "${comments}" ${Username} & /dev/null
+
+
+if [[ ${?} -ne 0 ]]
+then
+    echo "error al crear el usuario"
+exit 1
+fi
+echo "${Username}:${Password} | chpasswd    
+
+if [[ ${?} -ne 0 ]]
+then
+    echo "error al cambiar password"
+exit 1
+fi
+passwd -e ${Username}
+echo "creando el usuario ${Username}"
+
+
+exit 0
