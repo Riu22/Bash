@@ -4,16 +4,22 @@
 adivina=$(( ( RANDOM % 10 )  + 1 ))
 
 # Escriu el teu codi aqui
+vidas=3
 read -p " introduce un numero: " X
-if [[ X -lt adivina ]]
-then echo "fred"
-    elif [[ X -gt adivina ]]
-    then echo "calent"
-        elif [[ X -eq adivina ]]
+while [ $vidas -gt 0 ]
+do
+if [[ $X -eq $adivina ]]
         then echo "Eureka"
-        
-    
+        exit 0
 fi
+    
+if [[ $X -lt $adivina ]]
+then echo "fred"
+    else echo "calent"
+fi
+vidas=$((vidas - 1))
+read -p "introduce otro numero: " X
+done
 
 
 
