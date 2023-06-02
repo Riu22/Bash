@@ -44,11 +44,19 @@ do
     #CREAR L'USUARI amb el HOME
     useradd -m ${USER_NAME} &> /dev/null
     #COMPROVAM SI S'HA CREAT BÉ
-    
+    if [[ ${?} -ne 0 ]]
+    then   
+        echo "Error al crear usuario"
+        exit 1
+    fi
     #CANVIAM PASSWORD,
-
+echo "${USER_NAME}:${PASSWORD}" | chpasswd
     #comprovam si el canvi de password ha anat bé.
-
+if [[ ${?} -ne 0 ]]
+    then   
+        echo "Error al cambiar la contraseña"
+        exit 1
+    fi
     #FER QUE L'USARI HAGI DE CANVIAR EL PASSWORD AL PRIMER LOGIN
 done
 
